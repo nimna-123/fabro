@@ -1,0 +1,153 @@
+@font-face {
+  font-family: 'lnktrapReg';
+  src: url(./assets/fonts/PlusJakartaSans-Regular.ttf);
+}
+:where(.css-dev-only-do-not-override-12jzuas).ant-layout .ant-layout-sider-trigger {
+  background-color: #ffffff !important;
+}
+.site-layout{
+  background: #EBEBEB !important;
+ 
+}
+.site-head{
+  box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.04) !important;
+  border-radius: 0px 0px 0px 8px !important;
+
+}
+.OrderCont{
+  width: 100%;
+ 
+  min-height: 80vh;
+  background: #FFFFFF;
+  box-shadow: 0px 7px 14px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
+.orderHead{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.orderHead h3{
+  color: #14142B;
+  font-weight: 500;
+font-size: 20.74px;
+line-height: 26px;
+font-family: 'lnktrapReg';
+}
+.pad-30{
+  padding: 30px;
+}
+.SubmitBtn{
+  padding: 10px 15px;
+  color: #FFFFFF;
+  font-weight: 500;
+font-size: 14px;
+line-height: 22px;
+background: #300508;
+border-radius: 8px;
+cursor: pointer;
+}
+.pad-20{
+  padding: 20px;
+}
+th, td {
+  padding: 15px !important;
+}
+.table{
+  width: 100%;
+  border: 1px solid #D6D8E7;
+border-radius: 8px;
+
+}
+
+
+.tablFrstRow th{
+  background: #EFF0F7 !important;
+  color: #14142B;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  font-family: 'lnktrapReg';
+  height: 35px;
+  
+ 
+}
+.tableNextRow td{
+  color: #000000;
+  font-weight: 400;
+font-size: 12.5px;
+line-height: 22px;
+}
+.tabStatusCom{
+  color: #12B76A;
+  font-size: 12px;
+line-height: 13px;
+background: #D1FADF;
+border-radius: 4px;
+padding: 10px;
+text-align: center;
+width: 100px;
+
+}
+.tabFilter{
+  color: #000000;
+  width: 92px;
+height: 32px;
+background: #FFFFFF;
+border: 1px solid #300508;
+border-radius: 4px;
+padding: 2px 12px;
+cursor: pointer;
+font-size: 17px;
+
+}
+.filter{
+  display: flex;
+  justify-content: end;
+  padding-bottom: 15px;
+}
+.border{
+  border: 0.5px solid #CDCDCD;
+}
+.FormBox{
+  width: 100%;
+  min-height: 400px;
+  background: #FFFFFF;
+box-shadow: 0px 7px 14px rgba(0, 0, 0, 0.08);
+border-radius: 8px;
+margin-top: 30px;
+padding: 40px 30% 40px 50px;
+}
+.Submit{
+  width: 150px;
+  height: 56px;
+  background: #300508;
+border-radius: 8px;
+color: #FFFFFF;
+font-weight: 500;
+font-size: 16px;
+line-height: 22px;
+text-align: center;
+padding-top: 16px;
+font-family: 'lnktrapReg';
+cursor: pointer;
+float: right;
+
+}
+.bramdName{
+  color: #000000;
+  font-weight: 600;
+font-size: 17px;
+line-height: 22px;
+padding-bottom: 12px;
+}
+.form-select{
+  background-color: #EAEAEA !important;
+border-radius: 8px !important;
+color: #6B6B6B !important;
+--bs-form-select-bg-img: url(./assets/images/select.png) !important;
+}
+.form-select:focus{
+  border: none !important;
+}
+

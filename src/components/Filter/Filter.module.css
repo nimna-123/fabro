@@ -1,0 +1,68 @@
+.filter_section {
+    text-align: right;
+    position: relative;
+}
+.filter button {
+    background: transparent;
+    border: 1px solid lightgray;
+    padding: 10px 20px;
+}
+
+.myDIV {
+    position: absolute;
+    right: 0%;
+    background-color: #fff;
+    margin-top: 10px;
+    background: #ffffff;
+    border: 1px solid #e7e7e7;
+    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    padding: 20px;
+    width: 250px;
+    margin-top: -10px;
+}
+.status {
+    text-align: left;
+    color: #000;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.tabFilter{
+    color: #000000;
+    width: 92px;
+  height: 32px;
+  background: #FFFFFF;
+  border: 1px solid #300508;
+  border-radius: 4px;
+  padding: 5px 8px;
+  }
+.status_b1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0px;
+}
+.status_b2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.status_b1 {
+    color: #666666;
+}
+.clear {
+    background-color: transparent;
+    color: #e1b17d;
+    border: none;
+    font-size: 14px;
+}
+.apply {
+    background-color: #300508;
+    color: #fff;
+    border: none;
+    padding: 5px 20px;
+    font-size: 12px;
+    border-radius: 4px;
+}
