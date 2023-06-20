@@ -1,13 +1,43 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import DashboardLayout from "../components/DashboardLay/DashboardLay";
 import ConfigStages from "../components/ConfigStages/ConfigStages";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
 import {AiOutlineArrowRight} from 'react-icons/ai'
+import axios from "axios";
+import * as Urls from '../Urls'
 
 
 
-const ProductConfigStage1 = () => {
+const ProductConfigStage1 = (props) => {
+  const [userId,setUserId] = useState('')
+  const [countryId,setCountryId] = useState('')
+  const [brandNameList,setBrandNameList] = useState([])
+  const [brandId,setBrandId] = useState('')
+  const token = localStorage.getItem('fabroToken')
+  useEffect(()=>{
+     setUserId(props.location.state.userId);
+     setCountryId(props.location.state.countryId);
+     axios
+              .post(Urls.brandName+'?country_id='+'192'+'&token='+token)
+              .then((response1) => {
+                if(response1.data.msg='Success'){
+                  setBrandNameList(response1.data.vehicle_brand)
 
+                }
+               
+                console.log(response1);
+               
+                
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+
+  },[])
+  const brandNameChange = (e) =>{
+    setBrandId(e.target.value);
+
+  }
 
   return (
     <DashboardLayout>
@@ -28,11 +58,18 @@ const ProductConfigStage1 = () => {
             <select
               className="form-select form-select-md mb-3"
               aria-label=".form-select-lg example"
+              onChange={brandNameChange}
+              
             >
               <option>Select Brand name</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              {brandNameList.map((item,index)=>{
+                return(
+                  <option value={item.id} key={index}>{item.name}</option>
+
+                )
+              })}
+            
+            
             </select>
             <div className="bramdName">Vehicle Name</div>
 
