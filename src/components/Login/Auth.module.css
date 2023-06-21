@@ -41,6 +41,13 @@ min-height: 70vh;
 
 
 }
+.FormPartFor{
+  
+}
+.FormPartFor form{
+    padding-left: 32%;
+    padding-right: 32%;
+}
 .FormPart img{
     padding-top: 80px;
     padding-bottom: 30px;
@@ -68,6 +75,78 @@ font-family: 'lnktrapReg';
     padding-bottom: 10px;
 
 }
+.BackGrnd{
+ 
+    background: #E8ECF5;
+    height: 100vh;
+    width: 100%;
+    padding: 120px 60px;
+}
+.Layout{
+    background: #F5F6FA;
+box-shadow: 4px 1px 16px rgba(89, 89, 89, 0.08);
+border-radius: 16px;
+height: 100%;
+
+}
+.Layout img{
+    padding-top: 70px;
+}
+.Layout h3{
+    font-weight: 700;
+font-size: 24px;
+line-height: 22px;
+/* or 100% */
+
+padding-top: 15px;
+text-align: center !important;
+
+color: #4B272A;
+}
+.Layout p{
+    font-weight: 400;
+font-size: 16px;
+line-height: 22px;
+color: #838383;
+text-align: center;
+padding-top: 15px;
+}
+.BackGrnd{
+ 
+    background: #E8ECF5;
+    height: 100vh;
+    width: 100%;
+    padding: 120px 60px;
+}
+.Layout{
+    background: #F5F6FA;
+box-shadow: 4px 1px 16px rgba(89, 89, 89, 0.08);
+border-radius: 16px;
+height: 100%;
+
+}
+.Layout img{
+    padding-top: 70px;
+}
+.Layout h3{
+    font-weight: 700;
+font-size: 24px;
+line-height: 22px;
+/* or 100% */
+
+padding-top: 15px;
+text-align: center !important;
+
+color: #4B272A;
+}
+.Layout p{
+    font-weight: 400;
+font-size: 16px;
+line-height: 22px;
+color: #838383;
+text-align: center;
+padding-top: 15px;
+}
 .Input{
     background: #FFFFFF;
 border-radius: 8px;
@@ -93,6 +172,14 @@ font-family: 'lnktrapReg';
     font-size: 14px;
     padding-bottom: 5px;
 }
+.Back{
+    color: #838383;
+    font-weight: 400;
+font-size: 16px;
+line-height: 22px;
+cursor: pointer;
+padding-top: 15px;
+}
 
 .Submit{
     width: 100%;
@@ -109,8 +196,35 @@ font-family: 'lnktrapReg';
 cursor: pointer;
 
 }
+.Verify{
+    width: 370px;
+    height: 56px;
+    background: #300508;
+border-radius: 8px;
+color: #FFFFFF;
+font-weight: 700;
+font-size: 18px;
+line-height: 22px;
+text-align: center;
+padding-top: 16px;
+font-family: 'lnktrapReg';
+cursor: pointer;
+
+}
+.Space{
+    display: flex;
+    justify-content: space-between;
+}
+.Space p{
+    color: #838383;
+    font-weight: 400;
+font-size: 14px;
+line-height: 22px;
+cursor: pointer;
+}
 .check{
     font-weight: 400;
+    
 font-size: 15px;
 line-height: 22px;
 color: #838383;
@@ -120,6 +234,10 @@ padding-bottom: 15px;
     .SideBg{
         display: none;
       
+    }
+    .FormPartFor form{
+        padding-left: 12%;
+        padding-right: 12%;
     }
     .RightBg{
       

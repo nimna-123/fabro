@@ -134,6 +134,23 @@ cursor: pointer;
 float: right;
 
 }
+.CodeBox{
+  width: 100% !important;
+  height: 50px !important;
+  border:1px solid rgba(230, 230, 230, 1) !important;
+  border-radius: 4px;
+  font-size: 20px;
+  padding: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  outline: none;
+  background-color:  #FAFAFA;;
+}
+.OtpBsox{
+  margin-left: 0px;
+}
+
+
 .bramdName{
   color: #000000;
   font-weight: 600;

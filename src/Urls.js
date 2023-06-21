@@ -8,3 +8,6 @@ export const login = server + 'api/login/';
 export const auth = odooServer + 'api/authenticate'
 //brand name list
 export const brandName = odooServer + 'api/search/vehicle/brand'
+//send otp
+export const sendOtp = server + 'api/send-otp/'
+    

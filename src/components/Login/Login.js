@@ -1,5 +1,5 @@
 import React from "react";
-import Classes from "./Login.module.css";
+import Classes from "./Auth.module.css";
 import Logo from "../../assets/images/logo.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -59,6 +59,9 @@ const LoginComp = () => {
       onSubmitprops.resetForm();
     },
   });
+  const forgotPasswd = () =>{
+    history.push('/forgot_password')
+  }
   return (
     <div className="container-fluid">
       <div className="row">
@@ -107,9 +110,12 @@ const LoginComp = () => {
               {formik.touched.password && formik.errors.password && (
                 <div className={Classes.ErrorMsg}>{formik.errors.password}</div>
               )}
+              <div className={Classes.Space}>
               <div className={`${"d-flex"} ${Classes.check}`}>
                 <input type="checkbox" />
                 <label>&nbsp;&nbsp;Remember Me</label>
+              </div>
+              <p onClick={forgotPasswd}>Forgot Password?</p>
               </div>
 
               <div className={Classes.Submit} onClick={formik.handleSubmit}>
