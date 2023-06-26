@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Classes from "./Auth.module.css";
 import Logo from "../../assets/images/logo.svg";
 import { useFormik } from "formik";
@@ -6,8 +6,11 @@ import * as Yup from "yup";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { useHistory } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 const LoginComp = () => {
+  const [loading,setLoading] = useState(false)
+  const [error,setError] = useState('')
   const history = useHistory();
   const formik = useFormik({
     initialValues: {
@@ -24,9 +27,11 @@ const LoginComp = () => {
       let emailTrim = values.email;
       let passwordTrim = values.password.trim();
       const inputs = { email: emailTrim, password: passwordTrim };
+      setLoading(true)
       axios
         .post(Urls.login, inputs)
         .then((response1) => {
+          setLoading(false)
           if (response1.data.results.message === "Successfully logged in") {
             const authBody = {
               login: "admin",
@@ -36,6 +41,7 @@ const LoginComp = () => {
             axios
               .post(Urls.auth, authBody)
               .then((response2) => {
+               
                 localStorage.setItem("fabroToken", response2.data.result.token);
                 history.push({
                   pathname: "/config1",
@@ -44,13 +50,19 @@ const LoginComp = () => {
                     countryId: response1.data.results.data.country_id,
                   },
                 });
+              
               })
               .catch((error) => {
-                console.log(error);
+               
               });
           }
         })
         .catch((error) => {
+          console.log(error);
+          setLoading(false)
+          if(error.response.data.results.status_code === 400){
+            setError(error.response.data.results.message)
+          }
           console.log(error);
         });
 
@@ -83,6 +95,13 @@ const LoginComp = () => {
               <img src={Logo} alt="logo" />
             </div>
             <h3>Sign In</h3>
+            {loading ? (
+        <div className="d-flex justify-content-center align-items-center pad-20">
+          <ClipLoader color="#300508" />
+        </div>
+      ) : (
+        <>
+         <div className={Classes.ErrorMsg} style={{textAlign:'center'}}>{error}</div>
             <form autoComplete="off">
               <label className={Classes.Label}>Email</label>
               <br />
@@ -122,6 +141,7 @@ const LoginComp = () => {
                 Login
               </div>
             </form>
+            </>)}
           </div>
         </div>
       </div>

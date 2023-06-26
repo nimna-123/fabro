@@ -7,6 +7,7 @@ import ProductConfigStage1 from './pages/ProductConfigStage1';
 import ProductConfigStage2 from './pages/ProducrConfigStage2';
 import ForgotPaswd from './pages/ForgotPaswd';
 import OtpVerify from './pages/OtpVerify';
+import Changepswd from './pages/ChangePswd';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route  path="/"  component={ Login } exact/>
       <Route  path="/forgot_password"  component={ ForgotPaswd } exact/>
       <Route  path="/verify_otp"  component={ OtpVerify } exact/>
+      <Route  path="/change_password"  component={ Changepswd } exact/>
       <Route  path="/orders"  component={ Orders } exact/>
       <Route  path="/config1"  component={ ProductConfigStage1 } exact/>
       <Route  path="/config2"  component={ ProductConfigStage2 } exact/>

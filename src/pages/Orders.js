@@ -2,9 +2,7 @@ import React from "react";
 import DashboardLayout from "../components/DashboardLay/DashboardLay";
 import Filter from "../components/Filter/Filter";
 
-
 const Orders = () => {
-
   return (
     <DashboardLayout>
       <div className="OrderCont">
@@ -13,12 +11,8 @@ const Orders = () => {
           <div className="SubmitBtn">Create Order</div>
         </div>
         <div className="pad-20">
-         
-            {" "}
-         
-              <Filter/>
-             
-          
+          {" "}
+          <Filter />
           <table className="table">
             <thead></thead>
             <tbody>

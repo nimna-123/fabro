@@ -3,6 +3,7 @@ import DashboardLayout from "../components/DashboardLay/DashboardLay";
 import ConfigStages from "../components/ConfigStages/ConfigStages";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
 import {AiOutlineShoppingCart} from 'react-icons/ai'
+import Material from '../assets/images/material.png'
 
 const ProductConfigStage2 = () => {
   return (
@@ -19,6 +20,32 @@ const ProductConfigStage2 = () => {
       <div className="row">
         <div className="col-md-9">
           <div className="FormBox">
+            <div className="material">Material</div>
+            <div className="row">
+              <div className="col-md-1 ">
+              <img src={Material} alt='material' className="materialImg"/>
+
+              </div>
+              <div className="col-md-1">
+              <img src={Material} alt='material' className="materialImg"/>
+
+              </div>
+              <div className="bramdName">Material Spec</div>
+
+            <select
+              className="form-select form-select-md mb-3"
+              aria-label=".form-select-lg example"
+              style={{marginLeft:'5px'}}
+            
+              
+              
+            >
+              <option>Select Material Spec</option>
+            
+            
+            </select>
+             
+            </div>
            
             <div className='Submit'>Add to Cart&nbsp;&nbsp;&nbsp;<AiOutlineShoppingCart color="#FCFCFD" size={25}/></div>
           </div>
