@@ -60,9 +60,9 @@ const LoginComp = () => {
         .catch((error) => {
           console.log(error);
           setLoading(false)
-          if(error.response.data.results.status_code === 400){
-            setError(error.response.data.results.message)
-          }
+          // if(error.response.data.results.status_code === 400){
+          //   setError(error.response.data.results.message)
+          // }
           console.log(error);
         });
 

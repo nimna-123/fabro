@@ -18,4 +18,18 @@ export const changePswd = server + 'api/change-pass-forgot/'
 export const vehicleName = odooServer + 'api/search/vehicle/name'
 //model
 export const model = odooServer + 'api/search/vehicle/year'
+//material
+export const material = odooServer + 'api/search/vehicle/material'
+//seat
+export const seat = odooServer + 'api/search/vehicle/seat'
+//material spec
+export const matSpec = odooServer + 'api/search/vehicle/material/spec'
+//color primary
+export const primary = odooServer + 'api/search/vehicle/material/colour/prime'
+//color secondary
+export const secondary = odooServer + 'api/search/vehicle/material/colour/second'
+//design
+export const design = odooServer + 'api/search/vehicle/design'
+//subdesign
+export const subDesign = odooServer + 'api/search/vehicle/sub/design'
     
