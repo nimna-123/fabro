@@ -32,4 +32,11 @@ export const secondary = odooServer + 'api/search/vehicle/material/colour/second
 export const design = odooServer + 'api/search/vehicle/design'
 //subdesign
 export const subDesign = odooServer + 'api/search/vehicle/sub/design'
+//perforation
+export const perforation = odooServer + 'api/search/vehicle/perforation'
+//foam type
+export const foramType = odooServer + 'api/search/vehicle/foam/type'
+//back lineartype
+export const backLinear = odooServer + 'api/search/vehicle/backliner/type'
+
     

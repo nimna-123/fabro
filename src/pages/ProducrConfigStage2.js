@@ -17,7 +17,15 @@ const ProductConfigStage2 = (props) => {
   const [pColor,setPcolor] = useState([])
   const [sColor,setScolor] = useState([])
   const [designList,setDesignList] = useState([])
+  const [perforation,setPerforation] = useState([])
   const [subDesignList,setSubDesignList] = useState([])
+  const [design,setDesign] = useState('')
+  const [subDesign,setSubDesign] = useState('')
+  const [perforationName,setPerforationname] = useState('')
+  const [foamList,setFoamList] = useState([])
+  const [foam,setFoam] = useState('')
+  const [linearList,setLinear] = useState([])
+ 
   useEffect(() => {
     console.log(props.location.state.data);
     axios
@@ -113,8 +121,9 @@ const ProductConfigStage2 = (props) => {
     });
 
   }
-  const designHandler = (design) =>{
-    console.log(design);
+  const designHandler = (designs) =>{
+    console.log('hgj',JSON.parse(designs));
+    setDesign(JSON.parse(designs).name)
     axios
     .get(
       Urls.subDesign +
@@ -123,6 +132,63 @@ const ProductConfigStage2 = (props) => {
     )
     .then((response1) => {
       setSubDesignList(response1.data.data)
+     
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+
+  }
+  const subdesignHandler = (subDesign) =>{
+    setSubDesign(subDesign.name)
+    axios
+    .get(
+      Urls.perforation +
+        "?token=" +
+        token
+    )
+    .then((response1) => {
+      setPerforation(response1.data.seat_perforation)
+      
+     
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+  const perforationChange = (e)=>{
+    
+    setPerforationname(JSON.parse(e.target.value).name)
+    axios
+    .get(
+      Urls.foramType +
+        "?token=" +
+        token+
+      '&product_type='+props.location.state.data.pType+'&country_id=192'
+    )
+    .then((response1) => {
+     setFoamList(response1.data.data)
+      
+     
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  }
+  const foamtypeChange = (e) =>{
+    setFoam(JSON.parse(e.target.value).name)
+    axios
+    .get(
+      Urls.backLinear +
+        "?token=" +
+        token+
+      '&product_type='+props.location.state.data.pType+'&country_id=192'+'&product_type='+props.location.state.data.pType
+    )
+    .then((response1) => {
+          setLinear(response1.data.data)
+      
      
     })
     .catch((error) => {
@@ -143,7 +209,7 @@ const ProductConfigStage2 = (props) => {
         stageHead="Design Specifications"
       />
       <div className="row">
-        <div className="col-md-9">
+        <div className="col-md-8">
           <div className="FormBox">
             <div className="material">Material</div>
 
@@ -152,9 +218,9 @@ const ProductConfigStage2 = (props) => {
                 return (
                   <div className="col-md-1 materials " key={index}>
                     <img
-                      src={item.image_url}
+                      src={`data:image/jpeg;base64,${item.image_url}`}
                       alt="material"
-                      className="materialImg"
+                      className="imgBase"
                       onClick={() => materialSel(item.material_code)}
                     />
                   </div>
@@ -183,6 +249,12 @@ const ProductConfigStage2 = (props) => {
                   {pColor.map((item,index)=>{
                     return(
                       <div className="col-md-2 clrImg" key={index} onClick={()=>pColorHandler(JSON.stringify(item))}>
+                          <img
+                      src={`data:image/jpeg;base64,${item.image_url}`}
+                      alt="material"
+                      className="materialImg imgBase"
+                      onClick={() => materialSel(item.material_code)}
+                    />
                       <p className="color">{item.name}</p>
       
                     </div>
@@ -196,6 +268,12 @@ const ProductConfigStage2 = (props) => {
               {sColor.map((item,index)=>{
                     return(
                       <div className="col-md-2 clrImg" key={index} onClick={()=>sColorHandler(JSON.stringify(item))}>
+                          <img
+                      src={`data:image/jpeg;base64,${item.image_url}`}
+                      alt="material"
+                      className="materialImg imgBase"
+                      onClick={() => materialSel(item.material_code)}
+                    />
                       <p className="color">{item.name}</p>
       
                     </div>
@@ -208,6 +286,7 @@ const ProductConfigStage2 = (props) => {
               {designList.map((item,index)=>{
                     return(
                       <div className="col-md-2 clrImg" key={index} onClick={()=>designHandler(JSON.stringify(item))}>
+                        <img src={`data:image/jpeg;base64,${item.image_url}`} alt='design' className="imgBase"/>
                       <p className="color">{item.name}</p>
       
                     </div>
@@ -217,9 +296,11 @@ const ProductConfigStage2 = (props) => {
                 </div>
                 {subDesignList.length !== 0 && <div className="bramdName">Sub Design</div>} 
               <div className="row">
+                
               {subDesignList.map((item,index)=>{
                     return(
-                      <div className="col-md-2 clrImg" key={index}>
+                      <div className="col-md-2 clrImg" key={index} onClick={()=>subdesignHandler(item)}>
+                        <img src={`data:image/jpeg;base64,${item.image_url}`} className="imgBase"/>
                       <p className="color">{item.name}</p>
       
                     </div>
@@ -227,6 +308,61 @@ const ProductConfigStage2 = (props) => {
                     )
                   })}
                 </div>
+                <div className="row">
+                {perforation.length!==0&&<div className="bramdName">Perforation</div>}
+                {perforation.length!==0&&<select
+                className="form-select form-select-md mb-3"
+                aria-label=".form-select-lg example"
+                style={{ marginLeft: "5px" }}
+                onChange={perforationChange}
+              >
+                <option>Perforation</option>
+                {perforation.map((item, index) => {
+                  return (
+                    <option value={JSON.stringify(item)} key={index}>
+                      {item.name}
+                    </option>
+                  );
+                })}
+              </select>}
+                  </div>
+                  <div className="row">
+                {foamList.length!==0&&<div className="bramdName">Foam Type</div>}
+                {foamList.length!==0&&<select
+                className="form-select form-select-md mb-3"
+                aria-label=".form-select-lg example"
+                style={{ marginLeft: "5px" }}
+                onChange={foamtypeChange}
+              >
+                <option>Foam Type</option>
+                {foamList.map((item, index) => {
+                  return (
+                    <option value={JSON.stringify(item)} key={index}>
+                      {item.name}
+                    </option>
+                  );
+                })}
+              </select>}
+                  </div>
+                  <div className="row">
+                {linearList.length!==0&&<div className="bramdName">Back Liner Type</div>}
+                {linearList.length!==0&&<select
+                className="form-select form-select-md mb-3"
+                aria-label=".form-select-lg example"
+                style={{ marginLeft: "5px" }}
+                onChange={perforationChange}
+              >
+                <option>Back Liner Type</option>
+                {linearList.map((item, index) => {
+                  return (
+                    <option value={JSON.stringify(item)} key={index}>
+                      {item.name}
+                    </option>
+                  );
+                })}
+              </select>}
+                  </div>
+                  
              
              
             </div>
@@ -237,7 +373,7 @@ const ProductConfigStage2 = (props) => {
             </div>
           </div>
         </div>
-        <div className="col-md-3">
+        <div className="col-md-4">
           <ProductDetail
             BrndName={props.location.state.data.bName}
             vehName={props.location.state.data.vName}
@@ -247,6 +383,9 @@ const ProductConfigStage2 = (props) => {
             seatLay={props.location.state.data.seat}
             mat={material}
             matSpec={specName}
+            design={design}
+            subDesign={subDesign}
+            prefor={perforationName}
           />
         </div>
       </div>

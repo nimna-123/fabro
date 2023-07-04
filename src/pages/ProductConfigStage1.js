@@ -134,7 +134,7 @@ const ProductConfigStage1 = (props) => {
         stageHead="Vehicle Details"
       />
       <div className="row">
-        <div className="col-md-9">
+        <div className="col-md-8">
           <div className="FormBox">
             <div className="bramdName">Brand Name</div>
 
@@ -210,7 +210,7 @@ const ProductConfigStage1 = (props) => {
             <div className='Submit' onClick={step2Handler}>Next&nbsp;&nbsp;&nbsp;<AiOutlineArrowRight color="#FCFCFD" size={20}/></div>
           </div>
         </div>
-        <div className="col-md-3">
+        <div className="col-md-4">
           <ProductDetail BrndName={brandName} vehName={vehcleName} model={model} 
           vehSize={vehicleSize.name}
           prodType={productType.name}
