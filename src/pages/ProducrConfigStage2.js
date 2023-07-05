@@ -4,6 +4,7 @@ import ConfigStages from "../components/ConfigStages/ConfigStages";
 import ProductDetail from "../components/ProductDetail/ProductDetail";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import Material from "../assets/images/material.png";
+import {AiOutlineArrowRight} from 'react-icons/ai'
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import * as Urls from "../Urls";
@@ -21,10 +22,22 @@ const ProductConfigStage2 = (props) => {
   const [subDesignList,setSubDesignList] = useState([])
   const [design,setDesign] = useState('')
   const [subDesign,setSubDesign] = useState('')
+  const [matSpecCode,setMatSpecCode] = useState()
+  const [foamCode,setFoamCode] = useState('')
   const [perforationName,setPerforationname] = useState('')
   const [foamList,setFoamList] = useState([])
   const [foam,setFoam] = useState('')
   const [linearList,setLinear] = useState([])
+  const [backLiner,setBackLiner] = useState('')
+  const [pColors,setPColors] = useState('')
+  const [backCode,setBackCode] = useState('')
+  const [designCode,setDesinCode] = useState('')
+  const [perfoCode,setPerfCode] = useState('')
+  const [pCode,setPCode] = useState('')
+  const [sCode,setSCode] = useState('')
+  const [moq,setMoq] = useState('')
+  const [sku,setSku] = useState('')
+  const history = useHistory()
  
   useEffect(() => {
     console.log(props.location.state.data);
@@ -73,6 +86,7 @@ const ProductConfigStage2 = (props) => {
   const materialSpecChange = (e) => {
     console.log(JSON.parse(e.target.value).name);
     setSpecName(JSON.parse(e.target.value).name);
+    setMatSpecCode(JSON.parse(e.target.value).material_spec_code)
     axios
     .get(
       Urls.primary +
@@ -88,7 +102,9 @@ const ProductConfigStage2 = (props) => {
     });
   };
   const pColorHandler = (pColor) =>{
-    console.log(pColor);
+    setPColors(pColor.colour);
+    setPCode(pColor.colour_code)
+    setMoq(pColor.moq)
     axios
     .get(
       Urls.secondary +
@@ -105,7 +121,8 @@ const ProductConfigStage2 = (props) => {
 
   }
   const sColorHandler = (sColor) =>{
-    console.log(sColor);
+    console.log(sColor.colour_code);
+    setSCode(sColor.colour_code);
     axios
     .get(
       Urls.design +
@@ -124,6 +141,7 @@ const ProductConfigStage2 = (props) => {
   const designHandler = (designs) =>{
     console.log('hgj',JSON.parse(designs));
     setDesign(JSON.parse(designs).name)
+    setDesinCode(JSON.parse(designs).design_code)
     axios
     .get(
       Urls.subDesign +
@@ -158,6 +176,7 @@ const ProductConfigStage2 = (props) => {
     });
   }
   const perforationChange = (e)=>{
+    setPerfCode(JSON.parse(e.target.value).perforation_code)
     
     setPerforationname(JSON.parse(e.target.value).name)
     axios
@@ -179,6 +198,7 @@ const ProductConfigStage2 = (props) => {
   }
   const foamtypeChange = (e) =>{
     setFoam(JSON.parse(e.target.value).name)
+    setFoamCode(JSON.parse(e.target.value).foam_code)
     axios
     .get(
       Urls.backLinear +
@@ -196,6 +216,17 @@ const ProductConfigStage2 = (props) => {
     });
 
 
+  }
+  const backlineChange = (e) =>{
+    setBackLiner(JSON.parse(e.target.value).name)
+    setBackCode(JSON.parse(e.target.value).back_liner_type_code)
+    let sku = props.location.state.data.bvCode+'-'+props.location.state.data.seatLayCode+matSpecCode+foamCode+backCode+'-'+designCode+perfoCode+pCode+sCode
+   
+    setSku(sku)
+  }
+  const nextHandler = () =>{
+    history.push({pathname:'/config3',state:{data:sku}})
+  
   }
   return (
     <DashboardLayout>
@@ -227,9 +258,9 @@ const ProductConfigStage2 = (props) => {
                 );
               })}
 
-              <div className="bramdName">Material Spec</div>
+              {matSpecList.length !==0&&<div className="bramdName">Material Spec</div>}
 
-              <select
+              {matSpecList.length !==0&&<select
                 className="form-select form-select-md mb-3"
                 aria-label=".form-select-lg example"
                 style={{ marginLeft: "5px" }}
@@ -243,17 +274,17 @@ const ProductConfigStage2 = (props) => {
                     </option>
                   );
                 })}
-              </select>
+              </select>}
              {pColor.length !== 0 && <div className="bramdName">Primary Colour</div>} 
                 <div className="row">
                   {pColor.map((item,index)=>{
                     return(
-                      <div className="col-md-2 clrImg" key={index} onClick={()=>pColorHandler(JSON.stringify(item))}>
+                      <div className="col-md-2 clrImg" key={index} onClick={()=>pColorHandler(item)}>
                           <img
                       src={`data:image/jpeg;base64,${item.image_url}`}
                       alt="material"
                       className="materialImg imgBase"
-                      onClick={() => materialSel(item.material_code)}
+                     
                     />
                       <p className="color">{item.name}</p>
       
@@ -267,12 +298,13 @@ const ProductConfigStage2 = (props) => {
               <div className="row">
               {sColor.map((item,index)=>{
                     return(
-                      <div className="col-md-2 clrImg" key={index} onClick={()=>sColorHandler(JSON.stringify(item))}>
+                      <div className="col-md-2 clrImg" key={index} onClick={()=>sColorHandler(item)}>
                           <img
                       src={`data:image/jpeg;base64,${item.image_url}`}
                       alt="material"
                       className="materialImg imgBase"
-                      onClick={() => materialSel(item.material_code)}
+                     
+                      
                     />
                       <p className="color">{item.name}</p>
       
@@ -350,7 +382,7 @@ const ProductConfigStage2 = (props) => {
                 className="form-select form-select-md mb-3"
                 aria-label=".form-select-lg example"
                 style={{ marginLeft: "5px" }}
-                onChange={perforationChange}
+                onChange={backlineChange}
               >
                 <option>Back Liner Type</option>
                 {linearList.map((item, index) => {
@@ -367,9 +399,8 @@ const ProductConfigStage2 = (props) => {
              
             </div>
 
-            <div className="Submit">
-              Add to Cart&nbsp;&nbsp;&nbsp;
-              <AiOutlineShoppingCart color="#FCFCFD" size={25} />
+            <div className="Submit" onClick={nextHandler}>
+              Next&nbsp;&nbsp;&nbsp;<AiOutlineArrowRight color="#FCFCFD" size={20}/>
             </div>
           </div>
         </div>
@@ -386,6 +417,11 @@ const ProductConfigStage2 = (props) => {
             design={design}
             subDesign={subDesign}
             prefor={perforationName}
+            foamType={foam}
+            blt={backLiner}
+            color={pColors}
+            moq={moq}
+            sku={sku}
           />
         </div>
       </div>

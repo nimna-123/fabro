@@ -130,6 +130,12 @@ border-radius: 8px;
 margin-top: 30px;
 padding: 40px 30% 40px 50px;
 }
+.skuVal{
+  color: #B36F26;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+}
 .imgBase{
   width: 100px;
   height: 60px;

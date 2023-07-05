@@ -13,13 +13,15 @@ const ProductDetail = (props) =>{
                     <p>Seat Layout:</p>
                     <p>Material:</p>
                     <p>Material Spec:</p>
+                    <p>Colour: </p>
+                    <p>MOQ:</p>
                     <p>Design:</p>
                     <p>Sub Design:</p>
                     <p>Perforation:</p>
                     <p>Foam Type:</p>
                     <p>Back Liner Type:</p>
-                    <p>Colour: </p>
-                    <p>MOQ:</p>
+                  
+                    
                     <p>SKU:</p>
 
                 </div>
@@ -32,13 +34,15 @@ const ProductDetail = (props) =>{
                 <p>{props.seatLay}</p>
                 <p>{props.mat}</p>
                 <p>{props.matSpec}</p>
+                <p>{props.color}</p>
+                <p>{props.moq}</p>
                 <p>{props.design}</p>
                 <p>{props.subDesign}</p>   
                 <p>{props.prefor}</p>
                  <p>{props.foamType}</p>
                  <p>{props.blt}</p>
-                 <p>{props.color}</p>
-                 <p>{props.moq}</p>
+                
+               
                  <p>{props.sku}</p>
                     </div>
             </div>

@@ -17,8 +17,9 @@ const ProductConfigStage1 = (props) => {
   const [brandId,setBrandId] = useState('')
   const [brandName,setBrandName] = useState('')
   const [vehicleList,setVehicleList] = useState([])
-  const [vehicleId,setVehicleId] = useState('')
+  const [bvCode,setBvcode] = useState('')
   const [vehcleName,setVehicleName] = useState('')
+  const [seatLayCode,setSeatLayCode] = useState('')
   const [vehicleSize,setVehicleSize] = useState({id:'',name:''})
   const [productType,setProductType] = useState({id:'',name:''})
   const [seat,setSeat] = useState([])
@@ -89,16 +90,17 @@ const ProductConfigStage1 = (props) => {
   const vehicleNameHandler = (e) =>{
     console.log(JSON.parse(e.target.value));
     const selObj = JSON.parse(e.target.value)
-    setVehicleId(selObj.id);
+   
     setVehicleName(selObj.brand_vehicle_eng_name)
     setVehicleSize({id:selObj.vehicle_size_id,name:selObj.vehicle_size_id})
     setProductType({id:selObj.product_type_id,name:selObj.product_type_id})
+    setBvcode(selObj.bv_code)
    
 
   }
   const step2Handler = () =>{
     history.push({pathname:'/config2',state:{data:{bName:brandName,vName:vehcleName,model:model,
-      vSize:vehicleSize.name,pType:productType.name,country:countryId,seat:seatNo}}})
+      vSize:vehicleSize.name,pType:productType.name,country:countryId,seat:seatNo,bvCode:bvCode,seatLayCode:seatLayCode}}})
 
   }
   const modelChnge = (e) =>{
@@ -107,7 +109,11 @@ const ProductConfigStage1 = (props) => {
     .get(Urls.seat+'?token='+token+'&year='+e.target.value)
     .then((response1) => {
       console.log(response1);
-      setSeat(response1.data.vehicle_seat)
+      if(response1.data.success === true){
+        setSeat(response1.data.data)
+
+      }
+      
       
      
       
@@ -118,7 +124,8 @@ const ProductConfigStage1 = (props) => {
 
   }
   const seatSelectHandler = (seatNo)=>{
-    setSeatNo(seatNo)
+    setSeatNo(seatNo.layout_measurement)
+    setSeatLayCode(seatNo.layout_code)
 
   }
 
@@ -189,8 +196,8 @@ const ProductConfigStage1 = (props) => {
             {seat.map((item,index)=>{
               return(
               
-                <div className="col-md-4 layBox" key={index} onClick={()=>seatSelectHandler(item.layout_measurement)}>
-                  <img src={item.image_url} alt='seat' className="img-fluid"/>
+                <div className="col-md-4 layBox" key={index} onClick={()=>seatSelectHandler(item)}>
+                  <img src={`data:image/jpeg;base64,${item.image_url}`} alt='seat' className="img-fluid"/>
                   <p>WF-1573<br/>
                   2019-23<br/>
                   NO.1  BT.-1<br/>

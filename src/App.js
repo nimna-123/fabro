@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Orders from './pages/Orders';
 import ProductConfigStage1 from './pages/ProductConfigStage1';
 import ProductConfigStage2 from './pages/ProducrConfigStage2';
+import ProductConfigStage3 from './pages/ProductConfigStage3';
 import ForgotPaswd from './pages/ForgotPaswd';
 import OtpVerify from './pages/OtpVerify';
 import Changepswd from './pages/ChangePswd';
@@ -21,6 +22,7 @@ function App() {
       <Route  path="/orders"  component={ Orders } exact/>
       <Route  path="/config1"  component={ ProductConfigStage1 } exact/>
       <Route  path="/config2"  component={ ProductConfigStage2 } exact/>
+      <Route  path="/config3"  component={ ProductConfigStage3 } exact/>
       </Switch>
       </Router>
 
