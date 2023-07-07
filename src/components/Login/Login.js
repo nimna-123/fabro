@@ -31,7 +31,7 @@ const LoginComp = () => {
       axios
         .post(Urls.login, inputs)
         .then((response1) => {
-          setLoading(false)
+          
           if (response1.data.results.message === "Successfully logged in") {
             const authBody = {
               login: "admin",
@@ -41,7 +41,7 @@ const LoginComp = () => {
             axios
               .post(Urls.auth, authBody)
               .then((response2) => {
-               
+                setLoading(false)
                 localStorage.setItem("fabroToken", response2.data.result.token);
                 history.push({
                   pathname: "/config1",

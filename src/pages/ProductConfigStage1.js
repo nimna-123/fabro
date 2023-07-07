@@ -14,20 +14,20 @@ const ProductConfigStage1 = (props) => {
   const [userId,setUserId] = useState('')
   const [countryId,setCountryId] = useState('')
   const [brandNameList,setBrandNameList] = useState([])
-  const [brandId,setBrandId] = useState('')
-  const [brandName,setBrandName] = useState('')
+ 
+  const [brand,setBrand] = useState({id:'',name:''})
   const [vehicleList,setVehicleList] = useState([])
   const [bvCode,setBvcode] = useState('')
-  const [vehcleName,setVehicleName] = useState('')
+  const [vehcle,setVehicle] = useState({id:'',name:''})
   const [seatLayCode,setSeatLayCode] = useState('')
   const [vehicleSize,setVehicleSize] = useState({id:'',name:''})
   const [productType,setProductType] = useState({id:'',name:''})
   const [seat,setSeat] = useState([])
-  const [seatNo,setSeatNo] = useState('')
+  const [seatNo,setSeatNo] = useState({name:'',id:''})
   const history = useHistory()
 
   const [modelList,setModelList] = useState([])
-  const [model,setModel] = useState('')
+  const [model,setModel] = useState({id:'',name:''})
   const token = localStorage.getItem('fabroToken')
   useEffect(()=>{
     //  setUserId(props.location.state.userId);
@@ -66,10 +66,9 @@ const ProductConfigStage1 = (props) => {
 
   },[])
   const brandNameChange = (e) =>{
-    console.log(JSON.parse(e.target.value).name);
     const selObj = JSON.parse(e.target.value)
-    setBrandId(selObj.id);
-    setBrandName(selObj.name)
+   setBrand({id:selObj.id,name:selObj.name})
+   
     axios
     .get(Urls.vehicleName+'?country_id='+'192'+'&token='+token+'&brand_name='+selObj.id)
     .then((response1) => {
@@ -88,10 +87,10 @@ const ProductConfigStage1 = (props) => {
 
   }
   const vehicleNameHandler = (e) =>{
-    console.log(JSON.parse(e.target.value));
+   
     const selObj = JSON.parse(e.target.value)
    
-    setVehicleName(selObj.brand_vehicle_eng_name)
+    setVehicle({name:selObj.brand_vehicle_eng_name,id:selObj.id})
     setVehicleSize({id:selObj.vehicle_size_id,name:selObj.vehicle_size_id})
     setProductType({id:selObj.product_type_id,name:selObj.product_type_id})
     setBvcode(selObj.bv_code)
@@ -99,14 +98,16 @@ const ProductConfigStage1 = (props) => {
 
   }
   const step2Handler = () =>{
-    history.push({pathname:'/config2',state:{data:{bName:brandName,vName:vehcleName,model:model,
+    history.push({pathname:'/config2',state:{data:{brand:brand,vName:vehcle,model:model,
       vSize:vehicleSize.name,pType:productType.name,country:countryId,seat:seatNo,bvCode:bvCode,seatLayCode:seatLayCode}}})
 
   }
   const modelChnge = (e) =>{
-    setModel(e.target.value)
+    const selObj = JSON.parse(e.target.value)
+   
+    setModel({name:selObj.year_code,id:selObj.id})
     axios
-    .get(Urls.seat+'?token='+token+'&year='+e.target.value)
+    .get(Urls.seat+'?token='+token+'&year='+selObj.year_code)
     .then((response1) => {
       console.log(response1);
       if(response1.data.success === true){
@@ -124,7 +125,7 @@ const ProductConfigStage1 = (props) => {
 
   }
   const seatSelectHandler = (seatNo)=>{
-    setSeatNo(seatNo.layout_measurement)
+    setSeatNo({name:seatNo.layout_measurement,id:seatNo.id})
     setSeatLayCode(seatNo.layout_code)
 
   }
@@ -187,7 +188,7 @@ const ProductConfigStage1 = (props) => {
               <option>Select Model</option>
              {modelList.map((item,index)=>{
               return(
-                <option key={index} value={item.year_code}>{item.year_code}</option>
+                <option key={index} value={JSON.stringify(item)}>{item.year_code}</option>
               )
              })}
             </select>
@@ -218,10 +219,10 @@ const ProductConfigStage1 = (props) => {
           </div>
         </div>
         <div className="col-md-4">
-          <ProductDetail BrndName={brandName} vehName={vehcleName} model={model} 
+          <ProductDetail BrndName={brand.name} vehName={vehcle.name} model={model.name} 
           vehSize={vehicleSize.name}
           prodType={productType.name}
-          seatLay={seatNo}/>
+          seatLay={seatNo.id}/>
         </div>
       </div>
     </DashboardLayout>

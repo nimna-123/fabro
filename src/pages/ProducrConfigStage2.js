@@ -13,28 +13,28 @@ const ProductConfigStage2 = (props) => {
   const token = localStorage.getItem("fabroToken");
   const [materialList, setMaterialList] = useState([]);
   const [matSpecList, setMaterialSpecList] = useState([]);
-  const [material, setMaterial] = useState("");
-  const [specName, setSpecName] = useState("");
+  const [material, setMaterial] = useState({name:'',id:''});
+  const [specName, setSpecName] = useState({name:'',id:''});
   const [pColor,setPcolor] = useState([])
   const [sColor,setScolor] = useState([])
   const [designList,setDesignList] = useState([])
   const [perforation,setPerforation] = useState([])
   const [subDesignList,setSubDesignList] = useState([])
-  const [design,setDesign] = useState('')
-  const [subDesign,setSubDesign] = useState('')
+  const [design,setDesign] = useState({name:'',id:''})
+  const [subDesign,setSubDesign] = useState({name:'',id:''})
   const [matSpecCode,setMatSpecCode] = useState()
   const [foamCode,setFoamCode] = useState('')
-  const [perforationName,setPerforationname] = useState('')
+  const [perforationName,setPerforationname] = useState({name:'',id:''})
   const [foamList,setFoamList] = useState([])
-  const [foam,setFoam] = useState('')
+  const [foam,setFoam] = useState({name:'',id:''})
   const [linearList,setLinear] = useState([])
-  const [backLiner,setBackLiner] = useState('')
-  const [pColors,setPColors] = useState('')
+  const [backLiner,setBackLiner] = useState({name:'',id:''})
+  const [pColors,setPColors] = useState({name:'',id:''})
   const [backCode,setBackCode] = useState('')
   const [designCode,setDesinCode] = useState('')
   const [perfoCode,setPerfCode] = useState('')
   const [pCode,setPCode] = useState('')
-  const [sCode,setSCode] = useState('')
+  const [sCode,setSCode] = useState({name:'',id:''})
   const [moq,setMoq] = useState('')
   const [sku,setSku] = useState('')
   const history = useHistory()
@@ -63,7 +63,7 @@ const ProductConfigStage2 = (props) => {
       });
   }, []);
   const materialSel = (material) => {
-    setMaterial(material);
+    setMaterial({name:material.material_code,id:material.id});
     axios
       .get(
         Urls.matSpec +
@@ -85,7 +85,7 @@ const ProductConfigStage2 = (props) => {
   };
   const materialSpecChange = (e) => {
     console.log(JSON.parse(e.target.value).name);
-    setSpecName(JSON.parse(e.target.value).name);
+    setSpecName({name:JSON.parse(e.target.value).name,id:JSON.parse(e.target.value).id});
     setMatSpecCode(JSON.parse(e.target.value).material_spec_code)
     axios
     .get(
@@ -102,7 +102,7 @@ const ProductConfigStage2 = (props) => {
     });
   };
   const pColorHandler = (pColor) =>{
-    setPColors(pColor.colour);
+    setPColors({name:pColor.colour,id:pColor.id});
     setPCode(pColor.colour_code)
     setMoq(pColor.moq)
     axios
@@ -121,8 +121,8 @@ const ProductConfigStage2 = (props) => {
 
   }
   const sColorHandler = (sColor) =>{
-    console.log(sColor.colour_code);
-    setSCode(sColor.colour_code);
+    console.log(sColor);
+    setSCode({name:sColor.colour_code,id:sColor.id});
     axios
     .get(
       Urls.design +
@@ -140,7 +140,7 @@ const ProductConfigStage2 = (props) => {
   }
   const designHandler = (designs) =>{
     console.log('hgj',JSON.parse(designs));
-    setDesign(JSON.parse(designs).name)
+    setDesign({name:JSON.parse(designs).name,id:JSON.parse(designs).id})
     setDesinCode(JSON.parse(designs).design_code)
     axios
     .get(
@@ -159,7 +159,7 @@ const ProductConfigStage2 = (props) => {
 
   }
   const subdesignHandler = (subDesign) =>{
-    setSubDesign(subDesign.name)
+    setSubDesign({name:subDesign.name,id:subDesign.id})
     axios
     .get(
       Urls.perforation +
@@ -178,7 +178,7 @@ const ProductConfigStage2 = (props) => {
   const perforationChange = (e)=>{
     setPerfCode(JSON.parse(e.target.value).perforation_code)
     
-    setPerforationname(JSON.parse(e.target.value).name)
+    setPerforationname({name:JSON.parse(e.target.value).name,id:JSON.parse(e.target.value).id})
     axios
     .get(
       Urls.foramType +
@@ -197,7 +197,7 @@ const ProductConfigStage2 = (props) => {
 
   }
   const foamtypeChange = (e) =>{
-    setFoam(JSON.parse(e.target.value).name)
+    setFoam({name:JSON.parse(e.target.value).name,id:JSON.parse(e.target.value).id})
     setFoamCode(JSON.parse(e.target.value).foam_code)
     axios
     .get(
@@ -218,9 +218,10 @@ const ProductConfigStage2 = (props) => {
 
   }
   const backlineChange = (e) =>{
-    setBackLiner(JSON.parse(e.target.value).name)
+    setBackLiner({name:JSON.parse(e.target.value).name,id:JSON.parse(e.target.value).id})
     setBackCode(JSON.parse(e.target.value).back_liner_type_code)
-    let sku = props.location.state.data.bvCode+'-'+props.location.state.data.seatLayCode+matSpecCode+foamCode+backCode+'-'+designCode+perfoCode+pCode+sCode
+    console.log(sCode)
+    let sku = props.location.state.data.bvCode+'-'+props.location.state.data.seatLayCode+matSpecCode+foamCode+backCode+'-'+designCode+perfoCode+pCode+sCode.name
    
     setSku(sku)
   }
@@ -252,7 +253,7 @@ const ProductConfigStage2 = (props) => {
                       src={`data:image/jpeg;base64,${item.image_url}`}
                       alt="material"
                       className="imgBase"
-                      onClick={() => materialSel(item.material_code)}
+                      onClick={() => materialSel(item)}
                     />
                   </div>
                 );
@@ -406,20 +407,20 @@ const ProductConfigStage2 = (props) => {
         </div>
         <div className="col-md-4">
           <ProductDetail
-            BrndName={props.location.state.data.bName}
-            vehName={props.location.state.data.vName}
-            model={props.location.state.data.model}
+            BrndName={props.location.state.data.brand.name}
+            vehName={props.location.state.data.vName.name}
+            model={props.location.state.data.model.name}
             vehSize={props.location.state.data.vSize}
             prodType={props.location.state.data.pType}
-            seatLay={props.location.state.data.seat}
-            mat={material}
-            matSpec={specName}
-            design={design}
-            subDesign={subDesign}
-            prefor={perforationName}
-            foamType={foam}
-            blt={backLiner}
-            color={pColors}
+            seatLay={props.location.state.data.seat.name}
+            mat={material.name}
+            matSpec={specName.name}
+            design={design.name}
+            subDesign={subDesign.name}
+            prefor={perforationName.name}
+            foamType={foam.name}
+            blt={backLiner.name}
+            color={pColors.name}
             moq={moq}
             sku={sku}
           />

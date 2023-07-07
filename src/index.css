@@ -130,11 +130,46 @@ border-radius: 8px;
 margin-top: 30px;
 padding: 40px 30% 40px 50px;
 }
+.dec{
+  width: 50px;
+  height: 50px;
+  background-color: #FFFFFF;
+  border: 1px solid #D4D3D3;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.inc{
+  width: 50px;
+  height: 50px;
+  background-color: #FFFFFF;
+  border: 1px solid #D4D3D3;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.count{
+  width: 100px;
+  height: 50px;
+  background-color: #FFFFFF;
+  border: 1px solid #D4D3D3;
+  border-radius: 8px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .skuVal{
   color: #B36F26;
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
+  padding-bottom: 15px;
 }
 .imgBase{
   width: 100px;
